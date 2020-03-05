@@ -1,0 +1,36 @@
+<section class="login-form" fxLayout fxLayoutAlign="center center">
+  <mat-card fxFlex="350px" fxLayout="column" fxLayoutAlign="center center">
+    <!-- Make card size responsive -->
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+      <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <mat-form-field>
+          <input
+            type="email"
+            matInput
+            placeholder="Your email"
+            name="email"
+            email
+            required
+            ngModel
+            #emailInput="ngModel">
+          <mat-error *ngIf="emailInput.hasError('required')">Must enter email.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            type="password"
+            matInput
+            placeholder="Your password"
+            ngModel
+            name="password"
+            required
+            #pwInput="ngModel">
+          <mat-error *ngIf="pwInput.hasError('required')">Must enter password.</mat-error>
+        </mat-form-field>
+        <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+        <p>Don't have an account? <a routerLink="/signup">Click here</a> to join now!</p>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>
